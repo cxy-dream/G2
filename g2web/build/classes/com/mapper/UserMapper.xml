@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserMapper">
+	<select id="findById" parameterType="int"
+		resultType="com.bean.Wares">
+		select *from wares where wid=#{wid}
+	</select>
+	<select id="findAll" resultType="com.bean.Wares">
+		select*from wares
+	</select>
+	<update id="update" parameterType="com.bean.Wares">
+		update wares set wname=#{wname},classify=#{classify},price=#{price},img=#{img},keywords=#{keywords}, 
+		pageview=#{pageview},addTime=#{addTime},description=#{description},status=#{status} where wid=#{wid}
+		
+	</update>
+	<!-- 添加用户信息 -->
+	<insert id="inerst" parameterType="com.bean.Wares">
+		insert into wares(wname,classify,price,wnum,img,keywords,pageview,addTime,description,status)
+		 values(#{wname},#{classify},#{price},#{wnum},#{img},#{keywords},#{pageview},#{addTime},#{description},#{status})
+	</insert>
+	<!-- 根据id删除用户信息 -->
+	<delete id="delete" parameterType="int">
+		delete from wares where wid = #{wid}
+	</delete>
+	<!-- 模糊查询 -->
+	<select id="selectByName" parameterType="String" resultType="com.bean.Wares">
+		select * from wares where keywords like '%${value}%'
+	</select>
+</mapper>
